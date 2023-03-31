@@ -1,0 +1,19 @@
+version: "3.9"
+
+services: 
+  db:
+    image: postgres:14.2
+    container_name: postgres-sqlalchemy-demo
+    restart: always
+    environment:
+      - POSTGRES_USER=usr
+      - POSTGRES_PASSWORD=pwd
+      - POSTGRES_DB=demo-db
+    ports:
+      - 5455:5432
+    volumes:
+      - sqlalchemy-demo-data:/var/lib/postgresql/data
+      - ./sql-init/:/docker-entrypoint-initdb.d
+
+volumes:
+  sqlalchemy-demo-data:
